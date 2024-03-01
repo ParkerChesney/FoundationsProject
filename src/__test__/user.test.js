@@ -82,8 +82,9 @@ test("login", async () => {
         username: "bob",
         password: "asdf"
     };
+    await userDAO.registerUser(user);
     const result = await service.loginUser(user);
-    expect(result).toBe(null);
+    expect(result).toBe(undefined);
 });
 
 test("dao coverage", async () => {

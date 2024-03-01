@@ -95,6 +95,10 @@ router.put("/", async (req, res) => {
             .json({ message: "Was not updated", receivedData: req.body });
         }
     }
+    else
+    {
+        res.status(401).json({ message: "Unauthorized Access" });
+    }
 });
 
 router.post("/", async (req, res) => {
@@ -103,7 +107,7 @@ router.post("/", async (req, res) => {
 
     if (!token) {
         res.status(401).json({ message: "Unauthorized Access" });
-        return;
+        return 0;
     }
     let role = "";
     let username = "";
@@ -111,7 +115,7 @@ router.post("/", async (req, res) => {
     if(err)
     {
         res.status(401).json({ message: err.message });
-        return;
+        return 0;
     }
     if(user.role == "Employee")
     {
@@ -141,6 +145,10 @@ router.post("/", async (req, res) => {
             .status(400)
             .json({ message: "Was not created", receivedData: req.body });
         }
+    }
+    else
+    {
+        res.status(401).json({ message: "Unauthorized Access" });
     }
 });
 
