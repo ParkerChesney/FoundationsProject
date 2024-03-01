@@ -58,8 +58,6 @@ async function postTicket(receivedData, username) {
   {
     return "Missing amount";
   }
-
-  return null;
 }
 
 async function updateTicket(receivedData) {

@@ -23,6 +23,7 @@ async function registerUser(receivedData) {
         password: receivedData.password,
         role: "Finance Manager"
       });
+      return data;
     }
     else
     {
@@ -32,8 +33,8 @@ async function registerUser(receivedData) {
         password: receivedData.password,
         role: "Employee"
       });
+      return data;
     }
-    return data;
   }
   return "Missing username or password";
 }
