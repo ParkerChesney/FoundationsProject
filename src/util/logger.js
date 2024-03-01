@@ -9,14 +9,28 @@ const logger = createLogger({
     })
   ),
   transports: [
-    new transports.File({ filename: "error.log", level: "error" }), // log only errors to this log file
+    new transports.Console(), // log to the console
     new transports.File({ filename: "app.log" }), // log to a file
   ],
 });
 
 process.on("uncaughtException", (error) => {
-  logger.error(`Uncaught Exception: ${error}`);
+  errorLogger.error(`Uncaught Exception: ${error}`);
   process.exit(1);
 });
 
-module.exports = { logger };
+const errorLogger = createLogger({
+  level: "error",
+  format: format.combine(
+    format.timestamp(),
+    format.printf(({ timestamp, level, message }) => {
+      return `${timestamp} [${level}]: ${message}`;
+    })
+  ),
+  transports: [
+    new transports.Console(), // log to the console
+    new transports.File({ filename: "app.log" }), // log to a file
+  ],
+});
+
+module.exports = logger;
